@@ -1,0 +1,8 @@
+{
+    "name": "sdl",
+    "version": "0.0.1",
+    "dependencies": [
+        "sdl2",
+        "glew"
+    ]
+}

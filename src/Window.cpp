@@ -1,86 +1,45 @@
+#include <SDL2/SDL.h>
+#include <GL/glew.h>
+#include <iostream>
+
 #include "Window.hpp"
+#include "color.hpp"
 
-Rect rect(300,260,200,200);
-Circle circ(830,360,100,10000);
+SDL_Window *Window::window;
 
-Window::Window(const std::string &name, uint16_t w , uint16_t h){
-    Init(name , w ,h);
-}
 
-void Window::Init(const std::string &name,uint16_t  w,uint16_t h)
-{
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-    {
-
-        window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
-
-        if (!window)
-        {
-            std::cout << " window failed to init. Error: " << SDL_GetError()
-                      << '\n';
-        }
-
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-        if(renderer)
-        {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        }
-        isRunning = true;
-
+int Window::initialize(int width , int height, const char *title){
+    SDL_Init(SDL_INIT_EVERYTHING);
+    
+    window = SDL_CreateWindow(title,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height, SDL_WINDOW_OPENGL);
+    if(window == nullptr){
+        std::cerr << RED << "Failed to create SLD Widnow" << RESET << std::endl;
+        SDL_Quit(); 
+        return -1;
     }
 
+    SDL_GL_CreateContext(window);
 
+    if(glewInit() != GLEW_OK){
+        std::cerr << BOLDRED << "Failed to initialize GLEW with errro: " << glewGetErrorString(glewInit()) << RESET << std::endl; 
+        return -1;
+    }  
+    glViewport(0,0,width,height);
+    return 0;
 }
 
-void Window::handleEvent()
-{
-    SDL_Event event;
-
-
-    SDL_PollEvent(&event);
-    switch (event.type)
-    {
-    case SDL_QUIT:
-        this->isRunning = false;
-        break;
-
-    default:
-        break;
-    }
-}
-
-
-void Window::draw(Shape &shape){
-    shape.Draw(this->renderer); 
-}
-
-    
-
-void Window::update()
-{
-
-}
-
-void Window::render()
-{
-
-
-    
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-
-    draw(rect);
-    draw(circ);
-
-    SDL_RenderPresent(renderer);
-}
-
-
-Window::~Window()
-{
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
+void Window::terminate(){
+    SDL_DestroyWindow(window); 
     SDL_Quit();
+}
+
+void Window::swapBuffers(){
+    SDL_GL_SwapWindow(window);
+}
+
+bool Window::isShouldClose(){
+    SDL_Event event;
+    SDL_PollEvent(&event);
+    return (event.type == SDL_QUIT);
 }

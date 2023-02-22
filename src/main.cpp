@@ -1,34 +1,21 @@
 #include "Window.hpp"
+#include "Events.hpp"
 
-Window &window = Window::getInstance();
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
 
-const uint32_t FPS = 60;
-const uint32_t frameDelay = 1000 / FPS;
+
 
 int main(int argc, char const *argv[])
 {
-    uint32_t frameStart;
-    uint32_t frameTime;
+    Window::initialize(1280,720,"Window");
+    Events::initialize();
 
-    while (window.running())
-    {
-
-        frameStart = SDL_GetTicks();
-
-        window.update();
-        window.render();
-        window.handleEvent();
-
-        frameTime = SDL_GetTicks() - frameStart;
-
-        if (frameDelay > frameTime)
-        {
-            SDL_Delay(frameDelay - frameTime);
-        }
-        else
-        {
-        }
+    while(!Window::isShouldClose()){
+        Window::swapBuffers();
     }
+
+    Window::terminate();
     return 0;
-     
 }

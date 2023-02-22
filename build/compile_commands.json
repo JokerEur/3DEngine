@@ -1,17 +1,17 @@
 [
 {
-  "directory": "/home/ivan/Workspace/interview/build",
-  "command": "/bin/clang++ -I/home/ivan/Workspace/interview/inc -g -std=gnu++20 -o CMakeFiles/interview.dir/src/Shape.cpp.o -c /home/ivan/Workspace/interview/src/Shape.cpp",
-  "file": "/home/ivan/Workspace/interview/src/Shape.cpp"
+  "directory": "/home/ivan/Workspace/3DEngine/build",
+  "command": "/bin/clang++ -DGLEW_STATIC -I/home/ivan/Workspace/3DEngine/inc -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include/SDL2 -g -std=gnu++20 -o CMakeFiles/interview.dir/src/Events.cpp.o -c /home/ivan/Workspace/3DEngine/src/Events.cpp",
+  "file": "/home/ivan/Workspace/3DEngine/src/Events.cpp"
 },
 {
-  "directory": "/home/ivan/Workspace/interview/build",
-  "command": "/bin/clang++ -I/home/ivan/Workspace/interview/inc -g -std=gnu++20 -o CMakeFiles/interview.dir/src/Window.cpp.o -c /home/ivan/Workspace/interview/src/Window.cpp",
-  "file": "/home/ivan/Workspace/interview/src/Window.cpp"
+  "directory": "/home/ivan/Workspace/3DEngine/build",
+  "command": "/bin/clang++ -DGLEW_STATIC -I/home/ivan/Workspace/3DEngine/inc -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include/SDL2 -g -std=gnu++20 -o CMakeFiles/interview.dir/src/Window.cpp.o -c /home/ivan/Workspace/3DEngine/src/Window.cpp",
+  "file": "/home/ivan/Workspace/3DEngine/src/Window.cpp"
 },
 {
-  "directory": "/home/ivan/Workspace/interview/build",
-  "command": "/bin/clang++ -I/home/ivan/Workspace/interview/inc -g -std=gnu++20 -o CMakeFiles/interview.dir/src/main.cpp.o -c /home/ivan/Workspace/interview/src/main.cpp",
-  "file": "/home/ivan/Workspace/interview/src/main.cpp"
+  "directory": "/home/ivan/Workspace/3DEngine/build",
+  "command": "/bin/clang++ -DGLEW_STATIC -I/home/ivan/Workspace/3DEngine/inc -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include -isystem /home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/include/SDL2 -g -std=gnu++20 -o CMakeFiles/interview.dir/src/main.cpp.o -c /home/ivan/Workspace/3DEngine/src/main.cpp",
+  "file": "/home/ivan/Workspace/3DEngine/src/main.cpp"
 }
 ]

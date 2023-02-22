@@ -1,4 +1,4 @@
-# Install script for directory: /home/ivan/Workspace/interview
+# Install script for directory: /home/ivan/Workspace/3DEngine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ivan/Workspace/interview/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ivan/Workspace/3DEngine/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
