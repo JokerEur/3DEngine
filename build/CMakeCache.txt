@@ -17,6 +17,15 @@
 //No help, variable specified on the command line.
 -DCMAKE_TOOLCHAIN_FILE:STRING=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 
+//Value Computed by CMake
+3DEngine_BINARY_DIR:STATIC=/home/ivan/Workspace/3DEngine/build
+
+//Value Computed by CMake
+3DEngine_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+3DEngine_SOURCE_DIR:STATIC=/home/ivan/Workspace/3DEngine
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/bin/llvm-addr2line
 
@@ -26,8 +35,8 @@ CMAKE_AR:FILEPATH=/bin/llvm-ar
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
-//CXX compiler
-CMAKE_CXX_COMPILER:STRING=/bin/clang++
+//No help, variable specified on the command line.
+CMAKE_CXX_COMPILER:FILEPATH=/bin/clang++
 
 //LLVM archiver
 CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/llvm-ar
@@ -50,8 +59,8 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//C compiler
-CMAKE_C_COMPILER:STRING=/bin/clang
+//No help, variable specified on the command line.
+CMAKE_C_COMPILER:FILEPATH=/bin/clang
 
 //LLVM archiver
 CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/llvm-ar
@@ -143,7 +152,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=interview
+CMAKE_PROJECT_NAME:STATIC=3DEngine
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/bin/llvm-ranlib
@@ -212,15 +221,6 @@ GLEW_DIR:PATH=/home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/share/glew
 
 //The directory containing a CMake configuration file for SDL2.
 SDL2_DIR:PATH=/home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/share/sdl2
-
-//Value Computed by CMake
-interview_BINARY_DIR:STATIC=/home/ivan/Workspace/3DEngine/build
-
-//Value Computed by CMake
-interview_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-interview_SOURCE_DIR:STATIC=/home/ivan/Workspace/3DEngine
 
 
 ########################
