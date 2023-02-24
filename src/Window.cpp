@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Window.hpp"
+#include "Events.hpp"
 #include "color.hpp"
 
 SDL_Window *Window::window;
@@ -39,7 +40,5 @@ void Window::swapBuffers(){
 }
 
 bool Window::isShouldClose(){
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    return (event.type == SDL_QUIT);
+    return (Events::event.type == SDL_QUIT);
 }

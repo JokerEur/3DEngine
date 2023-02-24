@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(interview)
+project(3DEngine)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(CMAKE_PREFIX_PATH vcpkg_installed/x64-linux/share)
@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
     inc
+    inc/graphics
     vcpkg_installed/x64-linux/include
  
 )
@@ -17,8 +18,8 @@ LINK_DIRECTORIES(
     vcpkg_installed/x64-linux/lib
 )
 
-file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-file(GLOB INCLUDE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/inc/*.hpp)
+file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.cpp)
+file(GLOB INCLUDE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/inc/*.hpp  ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.hpp)
 
 
 add_executable(${PROJECT_NAME} ${INCLUDE_FILES} ${SOURCE_FILES})
