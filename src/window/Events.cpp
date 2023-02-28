@@ -1,7 +1,9 @@
 #include "Events.hpp"
 #include "Window.hpp"
-#include "color.hpp"
+
 #include <iostream> 
+
+#include "../color.hpp"
 
 bool *Events::keys;
 uint *Events::frames;
@@ -77,25 +79,27 @@ int Events::initialize(){
 
 
 void Events::pullEvents(){
+    
+    current++;
     deltaX = 0.0f;
     deltaY = 0.0f;
 
     while(SDL_PollEvent(&Events::event)){
         if(Events::event.type == SDL_QUIT){
-            break;
+            std::cout << BOLDYELLOW << "WARNING::SDL: exit requeued!\n"<< RESET << '\n';
+            Window::terminate();
         }
 
         if(Events::event.type == SDL_KEYUP){
             switch(Events::event.key.keysym.sym){
                 case SDLK_ESCAPE:
-                    std::cout << BOLDGREEN << "SDL_QUIT was requeued\n" << RESET;
+                    std::cout << BOLDGREEN << "SDL_QUIT was requested\n" << RESET;
                     key_callback(SDLK_ESCAPE,SDL_KEYUP);
                     Window::terminate();
                     break;
             }
         }
         
-        current++;
     }
     
 }

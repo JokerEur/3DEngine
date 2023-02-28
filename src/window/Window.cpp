@@ -4,7 +4,7 @@
 
 #include "Window.hpp"
 #include "Events.hpp"
-#include "color.hpp"
+#include "../color.hpp"
 
 SDL_Window *Window::window;
 

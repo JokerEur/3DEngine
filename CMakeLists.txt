@@ -9,7 +9,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
     inc
+    inc/window
     inc/graphics
+    inc/loaders
     vcpkg_installed/x64-linux/include
  
 )
@@ -18,12 +20,23 @@ LINK_DIRECTORIES(
     vcpkg_installed/x64-linux/lib
 )
 
-file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.cpp)
-file(GLOB INCLUDE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/inc/*.hpp  ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.hpp)
+file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.cpp 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/window/*.cpp
+    )
+file(GLOB INCLUDE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/inc/*.hpp  
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc/graphics/*.hpp 
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc/loaders/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc/window/*.hpp
+    )
 
 
 add_executable(${PROJECT_NAME} ${INCLUDE_FILES} ${SOURCE_FILES})
 
+
+find_package(PNG REQUIRED)
+    target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 
 find_package(GLEW REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
