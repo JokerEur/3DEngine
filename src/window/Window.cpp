@@ -6,21 +6,18 @@
 #include "Events.hpp"
 #include "../color.hpp"
 
-SDL_Window *Window::window;
 
-
-
-int Window::initialize(int width , int height, const char *title){
+int Window::initializeInternal(int width , int height, const char *title){
     SDL_Init(SDL_INIT_EVERYTHING);
     
-    window = SDL_CreateWindow(title,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height, SDL_WINDOW_OPENGL);
-    if(window == nullptr){
+    window_ = SDL_CreateWindow(title,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height, SDL_WINDOW_OPENGL);
+    if(window_ == nullptr){
         std::cerr << RED << "Failed to create SLD Widnow" << RESET << std::endl;
         SDL_Quit(); 
         return -1;
     }
 
-    SDL_GL_CreateContext(window);
+    SDL_GL_CreateContext(window_);
 
     if(glewInit() != GLEW_OK){
         std::cerr << BOLDRED << "Failed to initialize GLEW with errro: " << glewGetErrorString(glewInit()) << RESET << std::endl; 
@@ -30,15 +27,15 @@ int Window::initialize(int width , int height, const char *title){
     return 0;
 }
 
-void Window::terminate(){
-    SDL_DestroyWindow(window); 
+void Window::terminateInternal(){
+    SDL_DestroyWindow(window_); 
     SDL_Quit();
 }
 
-void Window::swapBuffers(){
-    SDL_GL_SwapWindow(window);
+void Window::swapBuffersInternal(){
+    SDL_GL_SwapWindow(window_);
 }
 
-bool Window::isShouldClose(){
+bool Window::isShouldCloseInternal(){
     return (Events::event.type == SDL_QUIT);
 }

@@ -51,14 +51,14 @@ void key_callback(int key , int action ){
 }
 
 
-bool Events::pressed(ptrdiff_t keycode){
+bool Events::pressedInternal(ptrdiff_t keycode){
     if(keycode < 0 || keycode >= _MOUSE_BUTTONS){
         return false;
     }
     return keys[keycode];
 }
 
-bool Events::justPressed(ptrdiff_t keycode){
+bool Events::justPressedInternal(ptrdiff_t keycode){
     if(keycode < 0 || keycode >= _MOUSE_BUTTONS){
         return false;
     }
@@ -66,7 +66,7 @@ bool Events::justPressed(ptrdiff_t keycode){
 }
 
 
-int Events::initialize(){
+int Events::initializeInternal(){
 
     keys =  new bool[1032];
     frames = new uint[1032]; 
@@ -78,7 +78,7 @@ int Events::initialize(){
 }
 
 
-void Events::pullEvents(){
+void Events::pullEventsInternal(){
     
     current++;
     deltaX = 0.0f;

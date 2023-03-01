@@ -27,7 +27,6 @@ int main(int argc, char const *argv[])
     Window::initialize(1280,720,"Window");
     Events::initialize();
 
-
     glClearColor(0.6f, 0.62f,0.65f , 1);
 
     Shader *shader = loadShader("../res/main.glslv", "../res/main.glslf");
