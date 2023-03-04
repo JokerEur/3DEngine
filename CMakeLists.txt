@@ -41,6 +41,10 @@ find_package(PNG REQUIRED)
 find_package(GLEW REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
 
+
+find_package(glm CONFIG REQUIRED)
+    target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
+
 find_package(SDL2 CONFIG REQUIRED)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE

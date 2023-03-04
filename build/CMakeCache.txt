@@ -240,6 +240,9 @@ ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 //Path to a library.
 ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/libz.so
 
+//The directory containing a CMake configuration file for glm.
+glm_DIR:PATH=/home/ivan/Workspace/3DEngine/vcpkg_installed/x64-linux/share/glm
+
 
 ########################
 # INTERNAL cache entries

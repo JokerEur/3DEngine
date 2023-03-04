@@ -1,6 +1,7 @@
 #pragma once 
 
 #include <SDL2/SDL.h>
+#include <functional>
 
 typedef unsigned int uint;
 
@@ -26,15 +27,24 @@ public:
     static float y;
     static bool cursorLocked;
     static bool cursorStart;
+    
     static SDL_Event event;
+    std::function<void(uint32_t type)> eventCallback;
+
+    
 
 private: 
     Events(){};
     Events(const Events&) = default;
     Events& operator= (Events&) = default;
+private: 
+    
+
 private:
     int initializeInternal();
     void pullEventsInternal();
     bool pressedInternal(ptrdiff_t keycode);
     bool justPressedInternal(ptrdiff_t keycode);
+    void registerCallback(SDL_Event* e);
+    void unregisterCallback(uint32_t type);
 };

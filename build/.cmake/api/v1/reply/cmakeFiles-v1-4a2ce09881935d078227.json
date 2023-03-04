@@ -217,6 +217,9 @@
 			"path" : "vcpkg_installed/x64-linux/share/glew/CopyImportedTargetProperties.cmake"
 		},
 		{
+			"path" : "vcpkg_installed/x64-linux/share/glm/glm-config.cmake"
+		},
+		{
 			"path" : "vcpkg_installed/x64-linux/share/sdl2/SDL2ConfigVersion.cmake"
 		},
 		{
