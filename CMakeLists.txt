@@ -20,7 +20,7 @@ LINK_DIRECTORIES(
     vcpkg_installed/x64-linux/lib
 )
 
-file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp 
+file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/*.cpp 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/window/*.cpp
@@ -40,7 +40,6 @@ find_package(PNG REQUIRED)
 
 find_package(GLEW REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
-
 
 find_package(glm CONFIG REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)

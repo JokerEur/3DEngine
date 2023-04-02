@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
+
 
 class Shader{
     public:
@@ -8,6 +10,7 @@ class Shader{
         ~Shader();
     public:
         void use();
+        void uniformMatrix(std::string name, glm::mat4 matrix);
     public:
         unsigned int id;
 };

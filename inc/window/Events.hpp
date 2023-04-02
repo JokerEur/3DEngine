@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 #include <functional>
+#include <memory>
+#include <map>
 
 typedef unsigned int uint;
 
@@ -13,9 +15,10 @@ static Events &getInstance(){
 };
 public:
     inline static int initialize() { return getInstance().initializeInternal(); };
-    inline static void pullEvents() { return getInstance().pullEventsInternal(); };
+    inline static void pullEvents() { getInstance().pullEventsInternal(); };
     inline static bool pressed(ptrdiff_t keycode) { return getInstance().pressedInternal(keycode); };
     inline static bool justPressed(ptrdiff_t keycode) {return getInstance().justPressedInternal(keycode); };
+    inline static void toogleCursor() { getInstance().toogleCursorInternal(); };
 
 public:
     static bool *keys;
@@ -28,23 +31,24 @@ public:
     static bool cursorLocked;
     static bool cursorStart;
     
-    static SDL_Event event;
-    std::function<void(uint32_t type)> eventCallback;
-
-    
+    static std::unique_ptr<SDL_Event> event;
+    typedef std::function<void(uint32_t keycode, uint32_t action)> eventCallback;
 
 private: 
     Events(){};
     Events(const Events&) = default;
     Events& operator= (Events&) = default;
 private: 
-    
-
+    std::map<uint32_t, eventCallback> callbacks_;
 private:
     int initializeInternal();
     void pullEventsInternal();
     bool pressedInternal(ptrdiff_t keycode);
     bool justPressedInternal(ptrdiff_t keycode);
-    void registerCallback(SDL_Event* e);
-    void unregisterCallback(uint32_t type);
+    void registerCallbackInternal(uint32_t type , eventCallback callback);
+    void unregisterCallbackInternal(uint32_t type);
+    void toogleCursorInternal();
+private:
+    static inline void registerCallback(uint32_t type , eventCallback callback) {return getInstance().registerCallbackInternal(type,callback);} ;
+    static inline void unregisterCallback(uint32_t type) { return getInstance().unregisterCallbackInternal(type); };
 };

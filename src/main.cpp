@@ -1,5 +1,6 @@
 #include "window/Window.hpp"
 #include "window/Events.hpp"
+#include "window/Camera.hpp"
 #include "graphics/Shader.hpp"
 #include "graphics/Texture.hpp"
 #include "loaders/png_load.hpp"
@@ -8,11 +9,13 @@
 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 #include <iostream>
 
 
 float vertices[] = {
-
+		// x    y     z     u     v
 	   -1.0f,-1.0f, 0.0f, 0.0f, 0.0f,
 		1.0f,-1.0f, 0.0f, 1.0f, 0.0f,
 	   -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -66,19 +69,70 @@ int main(int argc, char const *argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	extern Camera* camera; //! fix this extern variable
 
+	glm::mat4 model(1.0f);
+	model = glm::translate(model, glm::vec3(0.5f,0,0));
+
+
+	float lastTime = static_cast<float>(SDL_GetTicks()) / 1000.0f;
+	float delta{0.0f};
+
+	float speed = 5.0f;
+
+	float camX = 0.0f;
+	float camY = 0.0f;
 
     while(!Window::isShouldClose()){
-        Events::pullEvents();
+		float currentTime = static_cast<float>(SDL_GetTicks())/ 1000.0f;
+		delta = lastTime - currentTime;
+		lastTime = currentTime;
+
+		if(Events::justPressed(SDLK_TAB)){
+			Events::toogleCursor();
+		}
+
+		if(Events::pressed(SDLK_w)){
+			camera->position_ -= camera->front_ * delta * speed;
+		}
+		if(Events::pressed(SDLK_s)){
+			camera->position_ += camera->front_ * delta * speed;
+		}
+		if(Events::pressed(SDLK_a)){
+			camera->position_ += camera->right_ * delta * speed;
+		}
+		if(Events::pressed(SDLK_d)){
+			camera->position_ -= camera->right_ * delta * speed;
+		}
+
+		if (Events::cursorLocked){
+			camY += -Events::deltaY / 720 * 2;
+			camX += -Events::deltaX / 720 * 2;
+
+			if (camY < -glm::radians(89.0f)){
+				camY = -glm::radians(89.0f);
+			}
+			if (camY > glm::radians(89.0f)){
+				camY = glm::radians(89.0f);
+			}
+
+			camera->rotation_ = glm::mat4(1.0f);
+			camera->rotate(camY, camX, 0);
+		}
+
 
         glClear(GL_COLOR_BUFFER_BIT);
 
         shader->use();
+		shader->uniformMatrix("model" , model);
+		shader->uniformMatrix("projview", camera->getProjection()*camera->getView());
         texture->bind();
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
 
+
+        Events::pullEvents();
         Window::swapBuffers();
     }
 
